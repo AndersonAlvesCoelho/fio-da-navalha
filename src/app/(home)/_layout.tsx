@@ -1,43 +1,122 @@
 // IMPORT'S
-import { router, Slot } from 'expo-router';
-import { Image, ScrollView, Text, View } from 'react-native';
+import { Tabs } from 'expo-router';
 
-// COMPONET'S
-import { ButtonRoot } from '@/components/ui/Button';
-import { CircleUserRoundIcon } from 'lucide-react-native';
+// COMPONENT'S
+import { CalendarDaysIcon, HomeIcon, ImagesIcon, UserRoundIcon } from 'lucide-react-native';
 
 // STYLE'S
 import { colors } from '@/assets/styles/theme';
-import NavigationLayout from '@/components/app/navegation';
+import { cn } from '@/lib/utils';
+import { Text, View } from 'react-native';
 
 export default function RootLayout() {
   return (
-    <View className="flex-1 justify-center bg-zinc-100 ">
-      <View className="flex-row justify-between px-6 py-8">
-        <Image
-          source={{ uri: 'https://fakeimg.pl/25' }}
-          className="h-20 w-20 rounded-md"
-          resizeMode="cover"
-          alt="Fake image login"
-        />
-
-        <ButtonRoot
-          variant="link"
-          onPress={() => router.push('/(home)/setting')}
-        >
-          <Text>
-            <CircleUserRoundIcon
-              size={40}
-              strokeWidth={1}
-              color={colors.primary[500]}
-            />
-          </Text>
-        </ButtonRoot>
-      </View>
-      <ScrollView className="flex-1">
-        <Slot />
-      </ScrollView>
-      <NavigationLayout />
-    </View>
+    <Tabs
+      screenOptions={{
+        headerShown: false,
+        tabBarShowLabel: false,
+        tabBarStyle: {
+          backgroundColor: 'white',
+          height: 75,
+          paddingBottom: 10,
+          paddingTop: 10,
+          borderTopColor: colors.gray[200],
+          borderTopWidth: 1,
+        },
+      }}
+    >
+      <Tabs.Screen
+        name="index"
+        options={{
+          tabBarIcon: ({ focused }) => (
+            <View
+              className={cn(
+                'flex-row items-center justify-center gap-2',
+                focused && 'border px-3 py-2 bg-primary-500 rounded-full'
+              )}
+            >
+              <HomeIcon
+                color={focused ? colors.primary[50] : colors.primary[500]}
+                size={24}
+              />
+              {focused && (
+                <Text className={cn('text-base font-medium text-primary-50')}>
+                  Ínicio
+                </Text>
+              )}
+            </View>
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="publication"
+        options={{
+          tabBarIcon: ({ focused }) => (
+            <View
+              className={cn(
+                'flex-row items-center justify-center gap-2',
+                focused && 'border px-3 py-2 bg-primary-500 rounded-full'
+              )}
+            >
+              <ImagesIcon
+                color={focused ? colors.primary[50] : colors.primary[500]}
+                size={24}
+              />
+              {focused && (
+                <Text className={cn('text-base font-medium text-primary-50')}>
+                  Story
+                </Text>
+              )}
+            </View>
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="scheduling"
+        options={{
+          tabBarIcon: ({ focused }) => (
+            <View
+              className={cn(
+                'flex-row items-center justify-center gap-2',
+                focused && 'border px-3 py-2 bg-primary-500 rounded-full'
+              )}
+            >
+              <CalendarDaysIcon
+                color={focused ? colors.primary[50] : colors.primary[500]}
+                size={24}
+              />
+              {focused && (
+                <Text className={cn('text-base font-medium text-primary-50')}>
+                  Eventos
+                </Text>
+              )}
+            </View>
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="setting"
+        options={{
+          tabBarIcon: ({ focused }) => (
+            <View
+              className={cn(
+                'flex-row items-center justify-center gap-2',
+                focused && 'border px-3 py-2 bg-primary-500 rounded-full'
+              )}
+            >
+              <UserRoundIcon
+                color={focused ? colors.primary[50] : colors.primary[500]}
+                size={24}
+              />
+              {focused && (
+                <Text className={cn('text-base font-medium text-primary-50')}>
+                  Perfil
+                </Text>
+              )}
+            </View>
+          ),
+        }}
+      />
+    </Tabs>
   );
 }

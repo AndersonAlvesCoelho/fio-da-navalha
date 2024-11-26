@@ -1,15 +1,14 @@
-import { IconComponentType, IconName } from '@/@types/icons.type';
-import React from 'react';
-import IconComponents from '.';
-
+import { IconComponentType, IconName } from "@/@types/icons.type";
+import React from "react";
+import IconComponents from ".";
 
 interface IconProps {
   name: IconName;
-  color?: string;
+  color: string;
   size?: number;
 }
 
-export default function Icon({ name, color, size }: IconProps) {
+export default function Icon({ name, color, size = 24 }: IconProps) {
   const Icon = IconComponents[name] as IconComponentType;
 
   if (!Icon) {

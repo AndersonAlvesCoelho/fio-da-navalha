@@ -1,12 +1,11 @@
-
-import { OptimizedDataListProps } from '@/@types/dataList.type';
-import React from 'react';
-import { FlatList, View } from 'react-native';
+import { OptimizedDataListProps } from "@/@types/dataList.type";
+import React from "react";
+import { FlatList, View } from "react-native";
 
 type SeparatorMethods = {
   highlight: () => void;
   unhighlight: () => void;
-  updateProps: (select: 'leading' | 'trailing', newProps: any) => void;
+  updateProps: (select: "leading" | "trailing", newProps: any) => void;
 };
 
 const OptimizedDataList = <T,>({
