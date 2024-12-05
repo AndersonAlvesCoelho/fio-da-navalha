@@ -1,13 +1,37 @@
 // IMPORT'S
-import { Tabs } from 'expo-router';
-
-// COMPONENT'S
-import { CalendarDaysIcon, HomeIcon, ImagesIcon, UserRoundIcon } from 'lucide-react-native';
-
-// STYLE'S
 import { colors } from '@/assets/styles/theme';
 import { cn } from '@/lib/utils';
+import { Tabs } from 'expo-router';
+import {
+  CalendarDaysIcon,
+  HomeIcon,
+  ImagesIcon,
+  UserRoundIcon,
+} from 'lucide-react-native';
 import { Text, View } from 'react-native';
+
+// COMPONENTE GENÉRICO PARA ÍCONES
+const TabIcon = ({ focused, icon: Icon, label }: any) => (
+  <View
+    className={cn(
+      'flex-row items-center justify-center gap-2',
+      focused && 'border px-5 py-2 bg-primary-500 rounded-full'
+    )}
+  >
+    <Icon
+      color={focused ? colors.primary[50] : colors.primary[500]}
+      size={24}
+    />
+    {focused && (
+      <Text
+        className="text-base font-medium text-primary-50 whitespace-nowrap"
+        numberOfLines={1}
+      >
+        {label}
+      </Text>
+    )}
+  </View>
+);
 
 export default function RootLayout() {
   return (
@@ -17,11 +41,19 @@ export default function RootLayout() {
         tabBarShowLabel: false,
         tabBarStyle: {
           backgroundColor: 'white',
+          position: 'absolute',
           height: 75,
-          paddingBottom: 10,
-          paddingTop: 10,
           borderTopColor: colors.gray[200],
-          borderTopWidth: 1,
+          paddingHorizontal: 10,
+          paddingVertical: 10,
+          bottom: 25,
+          left: 10,
+          right: 10,
+          borderRadius: 1000,
+          elevation: 3,
+          shadowColor: 'gray',
+          shadowOpacity: 0.3,
+          shadowRadius: 12,
         },
       }}
     >
@@ -29,22 +61,7 @@ export default function RootLayout() {
         name="index"
         options={{
           tabBarIcon: ({ focused }) => (
-            <View
-              className={cn(
-                'flex-row items-center justify-center gap-2',
-                focused && 'border px-3 py-2 bg-primary-500 rounded-full'
-              )}
-            >
-              <HomeIcon
-                color={focused ? colors.primary[50] : colors.primary[500]}
-                size={24}
-              />
-              {focused && (
-                <Text className={cn('text-base font-medium text-primary-50')}>
-                  Ínicio
-                </Text>
-              )}
-            </View>
+            <TabIcon focused={focused} icon={HomeIcon} label="Ínicio" />
           ),
         }}
       />
@@ -52,22 +69,7 @@ export default function RootLayout() {
         name="publication"
         options={{
           tabBarIcon: ({ focused }) => (
-            <View
-              className={cn(
-                'flex-row items-center justify-center gap-2',
-                focused && 'border px-3 py-2 bg-primary-500 rounded-full'
-              )}
-            >
-              <ImagesIcon
-                color={focused ? colors.primary[50] : colors.primary[500]}
-                size={24}
-              />
-              {focused && (
-                <Text className={cn('text-base font-medium text-primary-50')}>
-                  Story
-                </Text>
-              )}
-            </View>
+            <TabIcon focused={focused} icon={ImagesIcon} label="Story" />
           ),
         }}
       />
@@ -75,22 +77,11 @@ export default function RootLayout() {
         name="scheduling"
         options={{
           tabBarIcon: ({ focused }) => (
-            <View
-              className={cn(
-                'flex-row items-center justify-center gap-2',
-                focused && 'border px-3 py-2 bg-primary-500 rounded-full'
-              )}
-            >
-              <CalendarDaysIcon
-                color={focused ? colors.primary[50] : colors.primary[500]}
-                size={24}
-              />
-              {focused && (
-                <Text className={cn('text-base font-medium text-primary-50')}>
-                  Eventos
-                </Text>
-              )}
-            </View>
+            <TabIcon
+              focused={focused}
+              icon={CalendarDaysIcon}
+              label="Eventos"
+            />
           ),
         }}
       />
@@ -98,22 +89,7 @@ export default function RootLayout() {
         name="setting"
         options={{
           tabBarIcon: ({ focused }) => (
-            <View
-              className={cn(
-                'flex-row items-center justify-center gap-2',
-                focused && 'border px-3 py-2 bg-primary-500 rounded-full'
-              )}
-            >
-              <UserRoundIcon
-                color={focused ? colors.primary[50] : colors.primary[500]}
-                size={24}
-              />
-              {focused && (
-                <Text className={cn('text-base font-medium text-primary-50')}>
-                  Perfil
-                </Text>
-              )}
-            </View>
+            <TabIcon focused={focused} icon={UserRoundIcon} label="Perfil" />
           ),
         }}
       />
