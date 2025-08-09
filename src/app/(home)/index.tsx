@@ -1,3 +1,4 @@
+
 import PostsFeed from '@/components/home/PostsFeed';
 import { FAKE_POSTS } from '@/constants/fakes';
 import { SafeAreaView } from 'react-native';

@@ -109,7 +109,7 @@ function SimpleCard({
 }
 
 export {
-    Card, CardContent, CardDescription, CardFooter, CardHeader,
-    CardTitle, SimpleCard
+  Card, CardContent, CardDescription, CardFooter, CardHeader,
+  CardTitle, SimpleCard
 };
 

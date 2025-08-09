@@ -1,11 +1,11 @@
 import React, { useRef, useState } from 'react';
 import {
-    FlatList,
-    LayoutRectangle,
-    Modal,
-    Text,
-    TouchableOpacity,
-    View,
+  FlatList,
+  LayoutRectangle,
+  Modal,
+  Text,
+  TouchableOpacity,
+  View,
 } from 'react-native';
 
 import { cn } from '@/lib/utils';

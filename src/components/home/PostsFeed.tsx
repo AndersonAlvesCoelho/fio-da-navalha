@@ -18,7 +18,7 @@ type PostsProps = {
   posts: Post[];
 };
 
-export default function Posts({ posts }: PostsProps) {
+export default function PostsFeed({ posts }: PostsProps) {
   const [visiblePosts, setVisiblePosts] = useState(posts.slice(0, 5));
   const [loading, setLoading] = useState(false);
   const [hasMore, setHasMore] = useState(true);

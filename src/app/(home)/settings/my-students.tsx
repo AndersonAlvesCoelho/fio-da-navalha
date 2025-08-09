@@ -1,11 +1,15 @@
+
 import PayingStudentsCard from '@/components/settings/payments/PayingStudentsCard';
 import { StudentManagementCard } from '@/components/settings/StudentManagementCard';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/Tabs';
 import { FAKE_STUDENTS, FAKE_STUDENTS_PAYMENT } from '@/constants/fakes';
 import React from 'react';
 import { Text, View } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 export default function MyStudentsScreen() {
+  const insets = useSafeAreaInsets();
+
   const totalStudents = FAKE_STUDENTS_PAYMENT.length;
   const pending = FAKE_STUDENTS_PAYMENT.filter(
     (s) => s.paymentStatus === 'pendente'
@@ -45,9 +49,8 @@ export default function MyStudentsScreen() {
         return 'bg-gray-100 text-gray-600';
     }
   };
-
   return (
-    <View className="flex-1 bg-white gap-4">
+    <View className="flex-1 bg-white gap-4" style={{ paddingTop: insets.top }}>
       <View className="bg-zinc-200  p-4 py-8">
         <Text className="text-2xl font-bold">Meus Alunos</Text>
         <View className="gap-2">

@@ -1,4 +1,3 @@
-// components/EventDetailsSheet.tsx
 import { EventItem } from '@/@types/events';
 import BottomSheet, { BottomSheetView } from '@gorhom/bottom-sheet';
 import { ClockIcon } from 'lucide-react-native';

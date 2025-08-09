@@ -1,9 +1,9 @@
 /* eslint-disable prettier/prettier */
 import React, {
-    cloneElement,
-    createContext,
-    useContext,
-    useState,
+  cloneElement,
+  createContext,
+  useContext,
+  useState,
 } from 'react';
 import { Text, View } from 'react-native';
 
@@ -91,6 +91,6 @@ const useDropdown = () => {
   return context;
 };
 export {
-    DropDown, DropDownContent, DropDownItem, DropDownItemSeparator, DropDownLabel, DropDownTrigger, useDropdown
+  DropDown, DropDownContent, DropDownItem, DropDownItemSeparator, DropDownLabel, DropDownTrigger, useDropdown
 };
 

@@ -1,4 +1,3 @@
-import { useColorScheme } from '@/components/useColorScheme';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import {
   DarkTheme,
@@ -11,8 +10,9 @@ import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
 export { ErrorBoundary } from 'expo-router';
 
+import '@/assets/styles/global.css';
+import { useColorScheme } from 'react-native';
 import 'react-native-reanimated';
-import '../global.css';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -45,8 +45,8 @@ function RootLayoutNav() {
   return (
     <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
       <Stack>
-        <Stack.Screen name="(auth)" options={{ headerShown: false }} />
         <Stack.Screen name="(home)" options={{ headerShown: false }} />
+        <Stack.Screen name="(auth)" options={{ headerShown: false }} />
       </Stack>
     </ThemeProvider>
   );

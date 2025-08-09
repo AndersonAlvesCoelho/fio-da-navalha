@@ -3,7 +3,6 @@ import React from 'react';
 
 import StoriesCarousel from '@/components/home/StoriesCarousel';
 import { useClientOnlyValue } from '@/components/useClientOnlyValue';
-import { useColorScheme } from '@/components/useColorScheme';
 import Colors from '@/constants/Colors';
 import { FAKE_STORIES } from '@/constants/fakes';
 import {
@@ -13,7 +12,7 @@ import {
   PlusIcon,
   SettingsIcon,
 } from 'lucide-react-native';
-import { TouchableOpacity } from 'react-native';
+import { TouchableOpacity, useColorScheme } from 'react-native';
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
@@ -43,12 +42,7 @@ export default function TabLayout() {
           title: 'Eventos',
           tabBarIcon: ({ color }) => <CalendarDaysIcon color={color} />,
           headerRight: () => (
-            <TouchableOpacity
-              // onPress={() => {
-              //   router.push('/events/new'); // Altere para sua rota real
-              // }}
-              className="px-2 py-2 rounded-full border border-amber-300 bg-amber-50 mr-4"
-            >
+            <TouchableOpacity className="px-2 py-2 rounded-full border border-amber-300 bg-amber-50 mr-4">
               <PlusIcon
                 className="p-2"
                 size={24}
@@ -69,7 +63,7 @@ export default function TabLayout() {
         name="settings"
         options={{
           title: 'Configurações',
-          tabBarIcon: ({ color }) => <SettingsIcon color={color} />, // use Lucide ou FontAwesome
+          tabBarIcon: ({ color }) => <SettingsIcon color={color} />,
         }}
       />
     </Tabs>

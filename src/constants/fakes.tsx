@@ -1,5 +1,5 @@
-import { IEvent } from '@/@types/events';
-import { IStudent } from '@/@types/my-students';
+import { IEvent } from '@/src/@types/events';
+import { IStudent } from '@/src/@types/my-students';
 
 export const FAKE_STORIES = [
   {

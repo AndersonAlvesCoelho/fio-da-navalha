@@ -1,3 +1,4 @@
+
 import { EnumEventType, EventItem, ISection } from '@/@types/events';
 import EventDetailsSheet from '@/components/events/EventDetailsSheet';
 import { ptBRTranslator } from '@/helper/utils/localeCalendarConfig';

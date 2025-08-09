@@ -1,13 +1,3 @@
-/** @type {import('tailwindcss').Config} */
-module.exports = {
-  content: [
-    "./app/**/*.{js,jsx,ts,tsx}",
-    "./components/**/*.{js,jsx,ts,tsx}",
-  ],
-  presets: [require("nativewind/preset")],
-  theme: {
-    extend: {},
-  },
-  plugins: [],
-};
-
+/* eslint-disable @typescript-eslint/no-var-requires */
+require('ts-node').register()
+module.exports = require('./tailwind.config.ts').default
