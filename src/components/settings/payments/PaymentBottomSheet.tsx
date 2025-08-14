@@ -1,25 +1,37 @@
-import BottomSheet, { BottomSheetView } from '@gorhom/bottom-sheet';
+import { IPayment } from '@/@types/payment';
+import BottomSheet, {
+  BottomSheetBackdrop,
+  BottomSheetView,
+} from '@gorhom/bottom-sheet';
 import { format } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 import * as DocumentPicker from 'expo-document-picker';
 import * as ImagePicker from 'expo-image-picker';
-import React, { RefObject, useState } from 'react';
+import React, { RefObject, useEffect, useMemo, useState } from 'react';
 import { Alert, Text, TouchableOpacity, View } from 'react-native';
 
-const currentMonth = format(new Date(), 'MMMM yyyy', { locale: ptBR });
-
 type PaymentBottomSheetProps = {
+  payment?: IPayment | null;
   onClose: () => void;
   bottomSheetRef: RefObject<BottomSheet | null>;
 };
 
 export default function PaymentBottomSheet({
+  payment,
   bottomSheetRef,
   onClose,
 }: PaymentBottomSheetProps) {
-  const snapPoints = ['45%'];
+  const snapPoints = useMemo(() => ['45%'], []);
+  const [fileName, setFileName] = useState<string | null>(
+    payment?.proofFileName || null
+  );
+  const currentMonth = useMemo(() => {
+    return payment
+      ? payment.month
+      : format(new Date(), 'MMMM yyyy', { locale: ptBR });
+  }, [payment]);
 
-  const [fileName, setFileName] = useState<string | null>(null);
+  const value = payment?.value ?? 100; // valor padrão caso não tenha
 
   const handleSelectPaymentProof = async () => {
     Alert.alert(
@@ -39,7 +51,7 @@ export default function PaymentBottomSheet({
               const uri = result.assets[0].uri;
               const name = uri.split('/').pop() || 'comprovante.jpg';
               setFileName(name);
-              // Aqui você pode fazer upload para o servidor
+              // Aqui você poderia fazer upload
             }
           },
         },
@@ -59,6 +71,10 @@ export default function PaymentBottomSheet({
       ]
     );
   };
+
+  useEffect(() => {
+    setFileName(payment?.proofFileName || null);
+  }, [payment]);
 
   return (
     <BottomSheet
@@ -81,12 +97,22 @@ export default function PaymentBottomSheet({
         borderTopRightRadius: 24,
         backgroundColor: 'white',
       }}
+      backdropComponent={(props) => (
+        <BottomSheetBackdrop
+          {...props}
+          opacity={0.5} // controla a opacidade
+          disappearsOnIndex={-1}
+          appearsOnIndex={0}
+        />
+      )}
     >
       <BottomSheetView className="p-6">
-        <Text className="text-xl font-semibold ">
+        <Text className="text-xl font-semibold">
           Mensalidade de {currentMonth}
         </Text>
-        <Text className="text-sm text-gray-500 mb-6">Valor: R$ 100,00</Text>
+        <Text className="text-sm text-gray-500 mb-6">
+          Valor: R$ {value.toFixed(2)}
+        </Text>
 
         {fileName && (
           <View className="mb-4">
@@ -97,24 +123,26 @@ export default function PaymentBottomSheet({
           </View>
         )}
 
-        <View className='gap-4'>
-          <TouchableOpacity
-            className="bg-emerald-600 py-3 px-4 rounded-xl"
-            onPress={handleSelectPaymentProof}
-          >
-            <Text className="text-white text-center font-medium">
-              Enviar comprovante
-            </Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            className="border border-emerald-600 py-3 px-4 rounded-xl"
-            onPress={handleSelectPaymentProof}
-          >
-            <Text className="text-emerald-600 text-center font-medium">
-              Reenviar comprovante
-            </Text>
-          </TouchableOpacity>
+        <View className="gap-4">
+          {!fileName ? (
+            <TouchableOpacity
+              className="bg-emerald-600 py-3 px-4 rounded-xl"
+              onPress={handleSelectPaymentProof}
+            >
+              <Text className="text-white text-center font-medium">
+                Enviar comprovante
+              </Text>
+            </TouchableOpacity>
+          ) : (
+            <TouchableOpacity
+              className="border border-emerald-600 py-3 px-4 rounded-xl"
+              onPress={handleSelectPaymentProof}
+            >
+              <Text className="text-emerald-600 text-center font-medium">
+                Reenviar comprovante
+              </Text>
+            </TouchableOpacity>
+          )}
         </View>
       </BottomSheetView>
     </BottomSheet>

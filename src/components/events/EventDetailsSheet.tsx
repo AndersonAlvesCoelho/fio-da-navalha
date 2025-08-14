@@ -1,5 +1,5 @@
 import { EventItem } from '@/@types/events';
-import BottomSheet, { BottomSheetView } from '@gorhom/bottom-sheet';
+import BottomSheet, { BottomSheetBackdrop, BottomSheetView } from '@gorhom/bottom-sheet';
 import { ClockIcon } from 'lucide-react-native';
 import React, { RefObject } from 'react';
 import { Text, View } from 'react-native';
@@ -54,6 +54,14 @@ const EventDetailsSheet: React.FC<Props> = ({
         borderTopRightRadius: 24,
         backgroundColor: 'white',
       }}
+      backdropComponent={(props) => (
+        <BottomSheetBackdrop
+          {...props}
+          opacity={0.5} // controla a opacidade
+          disappearsOnIndex={-1}
+          appearsOnIndex={0}
+        />
+      )}
     >
       <BottomSheetView style={{ padding: 24 }}>
         <Text

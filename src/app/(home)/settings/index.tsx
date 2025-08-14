@@ -9,7 +9,6 @@ import {
   FileStackIcon,
   FileTextIcon,
   LogOutIcon,
-  MoonIcon,
   UserIcon,
   UsersIcon,
 } from 'lucide-react-native';
@@ -27,18 +26,18 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 export default function SettingsScreen() {
   const router = useRouter();
-  const [darkMode, setDarkMode] = useState(false);
   const [notificationsEnabled, setNotificationsEnabled] = useState(true);
   const bottomSheetRef = useRef<BottomSheet>(null);
   const insets = useSafeAreaInsets();
 
-  
   return (
-    <GestureHandlerRootView >
-      <View className="flex-1 bg-slate-100" >
-        
+    <GestureHandlerRootView>
+      <View className="flex-1 bg-slate-100">
         {/* Card de perfil */}
-        <View className="overflow-hidden rounded-b-3xl bg-white relative shadow-lg" style={{ paddingTop: insets.top }}>
+        <View
+          className="overflow-hidden rounded-b-3xl bg-white relative shadow-lg"
+          style={{ paddingTop: insets.top }}
+        >
           <View className="px-4 py-6">
             <View className="flex-row items-center justify-between">
               <TouchableOpacity
@@ -73,7 +72,7 @@ export default function SettingsScreen() {
             <Text className="text-gray-500 text-sm mb-2">Conta</Text>
             <TouchableOpacity
               className="flex-row items-center justify-between bg-white p-4 rounded-lg shadow-sm mb-3"
-              onPress={() => router.push('/settings/profile')}
+              onPress={() => router.push('/(home)/settings/edit-profile')}
             >
               <View className="flex-row items-center gap-4">
                 <UserIcon color="#6B7280" size={20} />
@@ -86,7 +85,7 @@ export default function SettingsScreen() {
           {/* Preferências */}
           <View className="mb-8">
             <Text className="text-gray-500 text-sm mb-2">Preferências</Text>
-            <View className="flex-row items-center justify-between bg-white p-4 rounded-lg shadow-sm mb-3">
+            <View className="flex-row items-center justify-between bg-white  rounded-lg shadow-sm mb-3 px-4">
               <View className="flex-row items-center gap-4">
                 <BellIcon color="#6B7280" size={20} />
                 <Text className="text-gray-700 text-base">Notificações</Text>
@@ -96,13 +95,13 @@ export default function SettingsScreen() {
                 onValueChange={setNotificationsEnabled}
               />
             </View>
-            <View className="flex-row items-center justify-between bg-white p-4 rounded-lg shadow-sm">
+            {/* <View className="flex-row items-center justify-between bg-white p-4 rounded-lg shadow-sm">
               <View className="flex-row items-center gap-4">
                 <MoonIcon color="#6B7280" size={20} />
                 <Text className="text-gray-700 text-base">Modo Escuro</Text>
               </View>
               <Switch value={darkMode} onValueChange={setDarkMode} />
-            </View>
+            </View> */}
           </View>
 
           {/* Gestão */}
@@ -110,7 +109,7 @@ export default function SettingsScreen() {
             <Text className="text-gray-500 text-sm mb-2">Professor</Text>
             <TouchableOpacity
               className="flex-row items-center justify-between bg-white p-4 rounded-lg shadow-sm mb-3"
-              onPress={() => router.push('/settings/my-students')}
+              onPress={() => router.push('/settings/users')}
             >
               <View className="flex-row items-center gap-4">
                 <UsersIcon color="#6B7280" size={20} />
@@ -130,8 +129,11 @@ export default function SettingsScreen() {
 
           {/* Financeiro */}
           <View className="mb-8">
-            <Text className="text-gray-500 text-sm mb-2">Financeiro</Text>
-            <TouchableOpacity className="flex-row items-center justify-between bg-white p-4 rounded-lg shadow-sm mb-3">
+            <Text className="text-gray-500 text-sm mb-2">Histórico de Pagamentos</Text>
+            <TouchableOpacity
+              className="flex-row items-center justify-between bg-white p-4 rounded-lg shadow-sm mb-3"
+              onPress={() => router.push('/(home)/settings/payments-history')}
+            >
               <View className="flex-row items-center gap-4">
                 <FileStackIcon color="#6B7280" size={20} />
                 <Text className="text-gray-700 text-base">
