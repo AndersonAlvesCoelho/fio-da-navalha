@@ -78,21 +78,18 @@ export default function EditProfileScreen() {
             <Input
               placeholder="Nome"
               label="Seu nome"
-              inputClasses="border-2 border-blue-500"
             />
 
             <Input
               label="E-mail registrado"
               placeholder="Email"
               editable={false}
-              inputClasses="border-2 border-blue-500"
             />
 
             <Input
               keyboardType="numeric"
               placeholder="Data de nascimento"
               label="Data de nascimento"
-              inputClasses="border-2 border-blue-500"
             />
             <Select
               label="Graduação"
@@ -107,7 +104,6 @@ export default function EditProfileScreen() {
             <Input
               placeholder="Escola de Treinamento"
               label="Escola de Treinamento"
-              inputClasses="border-2 border-blue-500"
             />
 
             <TouchableOpacity className="bg-blue-500 p-4 rounded-lg mt-4">
@@ -123,17 +119,14 @@ export default function EditProfileScreen() {
             <Input
               placeholder="********"
               label="Senha atual"
-              inputClasses="border-2 border-blue-500"
             />
             <Input
               placeholder="********"
               label="Nova senha"
-              inputClasses="border-2 border-blue-500"
             />
             <Input
               placeholder="********"
               label="Confirmar nova senha"
-              inputClasses="border-2 border-blue-500"
             />
 
             <TouchableOpacity className="bg-blue-500 p-4 rounded-lg mt-4">

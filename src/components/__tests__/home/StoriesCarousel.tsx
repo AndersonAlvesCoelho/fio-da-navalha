@@ -8,7 +8,7 @@ type Story = {
   name: string;
   imageUri: string;
   isDefault?: boolean;
-  view?: boolean; 
+  view?: boolean;
 };
 
 type StoriesCarouselProps = {
@@ -28,7 +28,7 @@ export default function StoriesCarousel({
   };
 
   return (
-    <View className="flex-1 px-4">
+    <View>
       <FlatList
         horizontal
         data={stories}

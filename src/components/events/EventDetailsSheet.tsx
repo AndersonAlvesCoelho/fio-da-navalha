@@ -1,6 +1,11 @@
 import { EventItem } from '@/@types/events';
-import BottomSheet, { BottomSheetBackdrop, BottomSheetView } from '@gorhom/bottom-sheet';
-import { ClockIcon } from 'lucide-react-native';
+import { SNAP_POINTS } from '@/constants/bottomSheet';
+import { getColorByType } from '@/helper/utils/labels';
+import BottomSheet, {
+  BottomSheetBackdrop,
+  BottomSheetView,
+} from '@gorhom/bottom-sheet';
+import { ClockIcon, MapPinIcon } from 'lucide-react-native';
 import React, { RefObject } from 'react';
 import { Text, View } from 'react-native';
 
@@ -10,33 +15,18 @@ type Props = {
   bottomSheetRef: RefObject<BottomSheet | null>;
 };
 
-const getColorByType = (type: string) => {
-  switch (type) {
-    case 'aula':
-      return '#2563EB';
-    case 'evento':
-      return '#10B981';
-    case 'aniversario':
-      return '#F59E0B';
-    default:
-      return '#6B7280';
-  }
-};
-
 const EventDetailsSheet: React.FC<Props> = ({
   event,
   onClose,
   bottomSheetRef,
 }) => {
-  const snapPoints = ['40%'];
-
-  if (!event) return null;
+  const color = getColorByType(event?.type || 'other');
 
   return (
     <BottomSheet
       ref={bottomSheetRef}
       index={-1}
-      snapPoints={snapPoints}
+      snapPoints={SNAP_POINTS}
       enablePanDownToClose
       enableDynamicSizing={false}
       onClose={onClose}
@@ -46,8 +36,6 @@ const EventDetailsSheet: React.FC<Props> = ({
         shadowOpacity: 0.1,
         shadowRadius: 12,
         elevation: 10,
-        borderTopLeftRadius: 24,
-        borderTopRightRadius: 24,
       }}
       backgroundStyle={{
         borderTopLeftRadius: 24,
@@ -57,35 +45,59 @@ const EventDetailsSheet: React.FC<Props> = ({
       backdropComponent={(props) => (
         <BottomSheetBackdrop
           {...props}
-          opacity={0.5} // controla a opacidade
+          opacity={0.5}
           disappearsOnIndex={-1}
           appearsOnIndex={0}
         />
       )}
     >
-      <BottomSheetView style={{ padding: 24 }}>
-        <Text
-          style={{
-            fontSize: 20,
-            fontWeight: 'bold',
-            color: getColorByType(event.type),
-          }}
-        >
-          {event.title}
-        </Text>
+      {event ? (
+        <BottomSheetView className="p-6">
+          {/* Título */}
+          <Text
+            className="text-xl font-bold mb-3"
+            style={{ color: color }}
+          >
+            {event.title}
+          </Text>
 
-        <View
-          style={{ flexDirection: 'row', alignItems: 'center', marginTop: 8 }}
-        >
-          <ClockIcon size={16} color="#6B7280" />
-          <Text style={{ marginLeft: 6, color: '#6B7280' }}>{event.time}</Text>
-        </View>
+          {/* Tipo */}
+          <View className="mb-3 flex-row items-center">
+            <Text className="text-sm text-gray-500 mr-2">Tipo:</Text>
+            <Text
+              className="text-xs font-medium text-white px-2 py-1 rounded-md"
+              style={{ backgroundColor: color }}
+            >
+              {event.type.charAt(0).toUpperCase() + event.type.slice(1)}
+            </Text>
+          </View>
 
-        <Text style={{ marginTop: 16, color: '#4B5563' }}>
-          Aqui você pode colocar mais detalhes do evento, como local, descrição,
-          etc.
-        </Text>
-      </BottomSheetView>
+          {/* Horário */}
+          <View className="flex-row items-center mb-2">
+            <ClockIcon size={16} color="#6B7280" />
+            <Text className="ml-2 text-gray-500">
+              {event.timeStart} - {event.timeEnd}
+            </Text>
+          </View>
+
+          {/* Local */}
+          <View className="flex-row items-center mb-4">
+            <MapPinIcon size={16} color="#6B7280" />
+            <Text className="ml-2 text-gray-500">{event.location}</Text>
+          </View>
+
+          {/* Descrição */}
+          {event.description ? (
+            <Text className="text-sm text-gray-600 leading-5">
+              {event.description}
+            </Text>
+          ) : (
+            <Text className="text-sm text-gray-400 leading-5">
+              Sem descrição disponível.
+            </Text>
+          )}
+        </BottomSheetView>
+      ) : null}
     </BottomSheet>
   );
 };

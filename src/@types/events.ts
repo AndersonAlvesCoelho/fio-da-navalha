@@ -1,18 +1,13 @@
-export type EnumEventType = 'daily' | 'monthly' | 'birthday';
+export type EnumEventType = 'daily' | 'weekly' | 'monthly' | 'birthday' | 'special' | 'other';
 
-export interface IEvent {
+
+export type EventItem = {
   id: string;
   title: string;
   description?: string;
-  location?: string;
-  type: EnumEventType;
-  date: string;
-  time?: string;
-}
-
-export type EventItem = {
-  title: string;
-  time: string;
+  timeStart: string; // HH:mm
+  timeEnd: string;   // HH:mm
+  location: string;
   type: EnumEventType;
 };
 
@@ -20,6 +15,3 @@ export type ISection = {
   title: string; // data 'YYYY-MM-DD'
   data: EventItem[];
 };
-
-
-
