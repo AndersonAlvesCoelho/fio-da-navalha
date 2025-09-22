@@ -1,12 +1,20 @@
 import { IPost } from '@/@types/post';
+import {
+  DropDown,
+  DropDownContent,
+  DropDownTrigger,
+} from '@/components/ui/DropDown';
 import { FAKE_POSTS } from '@/constants/fakes';
 import { getTimeAgo } from '@/helper/format';
 import {
-  Badge,
   BookmarkIcon,
+  EllipsisVerticalIcon,
+  FlagIcon,
   HeartIcon,
   MessageCircleIcon,
+  PencilIcon,
   SendIcon,
+  Trash2Icon,
 } from 'lucide-react-native';
 import { useCallback, useRef, useState } from 'react';
 import {
@@ -88,26 +96,41 @@ export default function TabHomeScreen() {
             source={{ uri: item.user.avatar }}
             className="w-10 h-10 rounded-full mr-3"
           />
-          <View>
-            <View className="flex-row items-center gap-2">
-              <Text className="font-bold text-base">{item.user.name}</Text>
 
-              {graduationMain && (
-                <View className="relative items-center justify-center">
-                  <Badge
-                    size={18}
-                    // color={graduationMain?.color}
-                    // fill={graduationMain?.color + '20'}
+          <View className="flex-1">
+            {/* header nome + menu */}
+            <View className="flex-row items-center justify-between">
+              <Text className="font-bold text-base text-gray-900">
+                {item.user.name}
+              </Text>
 
-                    color="#facc15"
-                    fill="#facc15"
-                  />
-                  <Text className="absolute text-black font-bold text-xs">
-                    {graduationMain?.number}
-                  </Text>
-                </View>
-              )}
+              <DropDown>
+                <DropDownTrigger>
+                  <TouchableOpacity className="p-2">
+                    <EllipsisVerticalIcon size={20} color="#374151" />
+                  </TouchableOpacity>
+                </DropDownTrigger>
+
+                <DropDownContent className="right-0 mt-2 w-44 rounded-lg bg-white shadow-md border border-gray-200 p-1">
+                  <TouchableOpacity className="flex-row items-center gap-2 px-3 py-2 rounded-md hover:bg-gray-100">
+                    <PencilIcon size={16} color="#374151" />
+                    <Text className="text-sm text-gray-800">Editar Post</Text>
+                  </TouchableOpacity>
+
+                  <TouchableOpacity className="flex-row items-center gap-2 px-3 py-2 rounded-md hover:bg-gray-100">
+                    <Trash2Icon size={16} color="#374151" />
+                    <Text className="text-sm text-gray-800">Excluir Post</Text>
+                  </TouchableOpacity>
+
+                  <TouchableOpacity className="flex-row items-center gap-2 px-3 py-2 rounded-md hover:bg-gray-100">
+                    <FlagIcon size={16} color="#374151" />
+                    <Text className="text-sm text-gray-800">Denunciar</Text>
+                  </TouchableOpacity>
+                </DropDownContent>
+              </DropDown>
             </View>
+
+            {/* data abaixo */}
             <Text className="text-xs text-gray-500">
               {getTimeAgo(item.createdAt)}
             </Text>

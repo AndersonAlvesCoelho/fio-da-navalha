@@ -1,16 +1,16 @@
+import Colors from '@/constants/Colors';
 import { Switch as NativeSwitch, useColorScheme } from 'react-native';
 
-import { theme } from '../styles/theme';
 
 function Switch({
   ...props
 }: React.ComponentPropsWithoutRef<typeof NativeSwitch>) {
   const colorScheme = useColorScheme();
-  const currentTheme = colorScheme === 'dark' ? theme.dark : theme.light;
+  const currentTheme = colorScheme === 'dark' ? Colors.dark : Colors.light;
 
   const trackColor = props.trackColor || {
     false: currentTheme.background,
-    true: currentTheme.foreground,
+    true: currentTheme.tint,
   };
   const thumbColor = props.thumbColor || currentTheme.background;
   const ios_backgroundColor =

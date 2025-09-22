@@ -82,18 +82,9 @@ function TabsContent({ value, className, ...props }: TabsContentProps) {
   const { activeTab } = useContext(TabsContext);
 
   if (value === activeTab)
-    return (
-      <View
-        className={cn(
-          'border border-border mt-2 px-4 py-4 rounded-xl',
-          className
-        )}
-        {...props}
-      />
-    );
+    return <View className={cn('px-4 py-4', className)} {...props} />;
 
   return null;
 }
 
 export { Tabs, TabsContent, TabsList, TabsTrigger };
-

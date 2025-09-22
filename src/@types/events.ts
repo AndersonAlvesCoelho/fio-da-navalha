@@ -9,6 +9,8 @@ export type EventItem = {
   timeEnd: string;   // HH:mm
   location: string;
   type: EnumEventType;
+  thumbnail: string
+  date: string
 };
 
 export type ISection = {

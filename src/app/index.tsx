@@ -4,5 +4,5 @@ import '@/assets/styles/global.css';
 import 'react-native-reanimated';
 
 export default function Index() {
-  return <Redirect href="/(home)/settings" />;
+  return <Redirect href="/(home)/profile" />;
 }

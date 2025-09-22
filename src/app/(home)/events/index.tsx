@@ -4,7 +4,7 @@ import { FAKES_EVENTS } from '@/constants/fakes';
 import { getColorByType } from '@/helper/utils/labels';
 import { ptBRTranslator } from '@/helper/utils/localeCalendarConfig';
 import BottomSheet from '@gorhom/bottom-sheet';
-import { ClockIcon, MapPinIcon } from 'lucide-react-native';
+import { ShareIcon } from 'lucide-react-native';
 import React, {
   useCallback,
   useEffect,
@@ -12,7 +12,7 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
+import { Image, Text, TouchableOpacity, View } from 'react-native';
 import {
   AgendaList,
   CalendarProvider,
@@ -20,6 +20,7 @@ import {
   LocaleConfig,
 } from 'react-native-calendars';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 LocaleConfig.locales['pt-br'] = ptBRTranslator;
 LocaleConfig.defaultLocale = 'pt-br';
@@ -28,6 +29,7 @@ export default function TabEventsScreen() {
   const [selectedDate, setSelectedDate] = useState(FAKES_EVENTS[0].title);
   const [selectedEvent, setSelectedEvent] = useState<EventItem | null>(null);
   const bottomSheetRef = useRef<BottomSheet>(null);
+  const insets = useSafeAreaInsets();
 
   const handleDateChange = (date: string) => {
     setSelectedDate(date);
@@ -52,47 +54,42 @@ export default function TabEventsScreen() {
 
     return (
       <TouchableOpacity
-        className="mx-4 my-2 rounded-lg bg-white shadow-sm border-l-4"
-        style={{ borderLeftColor: color }}
+        className="mx-4 my-2 "
         activeOpacity={0.7}
         onPress={() => setSelectedEvent(item)}
       >
-        <View className="p-4">
-          {/* Título do Evento */}
-          <Text className="text-base font-semibold text-gray-800 mb-1">
-            {item.title}
-          </Text>
+        {/* Thumbnail */}
+        {item.thumbnail && (
+          <Image
+            source={{ uri: item.thumbnail }}
+            className="w-full h-40 rounded-lg"
+            resizeMode="cover"
+          />
+        )}
 
-          {/* Horário */}
-          <View className="flex-row items-center mb-1">
-            <ClockIcon size={14} color="#6B7280" className="mr-1" />
-            <Text className="text-sm text-gray-500">
-              {item.timeStart} - {item.timeEnd}
+        <View className="p-4">
+          {/* Nome + compartilhar */}
+          <View className="flex-row justify-between items-center mb-2">
+            <Text className="text-base font-semibold text-gray-800 flex-1">
+              {item.title}
             </Text>
+            <TouchableOpacity
+              onPress={() => console.log('Compartilhar', item.id)}
+            >
+              <ShareIcon size={18} color="#6B7280" />
+            </TouchableOpacity>
           </View>
 
-          {/* Local */}
-          {item.location && (
-            <View className="flex-row items-center mb-1">
-              <MapPinIcon size={14} color="#6B7280" className="mr-1" />
-              <Text className="text-sm text-gray-500">{item.location}</Text>
-            </View>
-          )}
-
-          {/* Tipo do Evento */}
-          <Text
-            className="text-xs font-medium text-white px-2 py-1 rounded-md"
-            style={{ backgroundColor: color, alignSelf: 'flex-start' }}
-          >
-            {item.type.charAt(0).toUpperCase() + item.type.slice(1)}
-          </Text>
-
-          {/* Descrição resumida */}
-          {item.description && (
-            <Text className="text-sm text-gray-400 mt-2" numberOfLines={2}>
-              {item.description}
+          {/* Data + horário + local */}
+          <View className="mb-2">
+            <Text className="text-sm text-gray-600">
+              {item.date} • {item.timeStart} - {item.timeEnd}
             </Text>
-          )}
+            {item.location && (
+              <Text className="text-sm text-gray-500">{item.location}</Text>
+            )}
+          </View>
+
         </View>
       </TouchableOpacity>
     );
@@ -105,12 +102,13 @@ export default function TabEventsScreen() {
   }, [selectedEvent]);
 
   return (
-    <GestureHandlerRootView className="flex-1">
+    <GestureHandlerRootView className="flex-1 bg-slate-100">
       <CalendarProvider
         date={selectedDate}
         onDateChanged={handleDateChange}
         showTodayButton
         theme={{ todayButtonTextColor: '#2563EB' }}
+        style={{ paddingTop: insets.top }}
       >
         <ExpandableCalendar firstDay={1} markedDates={markedDates} />
         {filteredSections.length > 0 ? (

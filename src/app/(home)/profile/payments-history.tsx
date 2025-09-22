@@ -1,15 +1,15 @@
 import { IPayment } from '@/@types/payment';
-import PaymentBottomSheet from '@/components/settings/payments/PaymentBottomSheet';
+import PaymentBottomSheet from '@/components/profile/payments/PaymentBottomSheet';
 import { formatDateNumeric, formatMonthYear } from '@/helper/format';
 import BottomSheet from '@gorhom/bottom-sheet';
 import { CheckCircle, Clock, XCircle } from 'lucide-react-native';
 import { useEffect, useRef, useState } from 'react';
 import {
-  ActivityIndicator,
-  FlatList,
-  Text,
-  TouchableOpacity,
-  View,
+    ActivityIndicator,
+    FlatList,
+    Text,
+    TouchableOpacity,
+    View,
 } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';

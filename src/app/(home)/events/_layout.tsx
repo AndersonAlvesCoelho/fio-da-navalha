@@ -2,7 +2,7 @@ import { Slot, useNavigation } from 'expo-router';
 import { useEffect } from 'react';
 import { View } from 'react-native';
 
-export default function SettingsLayout() {
+export default function EventsLayout() {
   const navigation = useNavigation();
 
   useEffect(() => {

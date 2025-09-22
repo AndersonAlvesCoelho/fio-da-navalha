@@ -2,13 +2,16 @@ import { Tabs } from 'expo-router';
 import React from 'react';
 
 import { colors } from '@/assets/styles/theme';
-import HeaderEvents from '@/components/header/events';
-import HeaderHome from '@/components/header/home';
-import HeaderNotifications from '@/components/header/notifications';
-import IconWithBottomIndicator from '@/components/tabs/IconWithBottomIndicator';
 import NotificationIconWithBadge from '@/components/tabs/NotificationIconWithBadge';
 import { useClientOnlyValue } from '@/components/useClientOnlyValue';
-import { CalendarDaysIcon, HomeIcon, SettingsIcon } from 'lucide-react-native';
+
+//COMPONENTS
+import BackButton from '@/components/header/BackButton';
+import HeaderEvents from '@/components/header/Events';
+import HeaderHome from '@/components/header/Home';
+import HeaderNotifications from '@/components/header/Notifications';
+import IconWithBottomIndicator from '@/components/tabs/IconWithBottomIndicator';
+import { CalendarDaysIcon, HomeIcon, User2Icon } from 'lucide-react-native';
 
 export default function TabLayout() {
   const hasNotifications = true;
@@ -74,11 +77,12 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="settings"
+        name="profile"
         options={{
           headerShown: false,
+          headerLeft: () => <BackButton color="#2563EB" size={28} />,
           tabBarIcon: ({ focused }) => (
-            <IconWithBottomIndicator focused={focused} Icon={SettingsIcon} />
+            <IconWithBottomIndicator focused={focused} Icon={User2Icon} />
           ),
         }}
       />

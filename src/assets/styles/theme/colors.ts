@@ -4,8 +4,6 @@ export const colors = {
 
   bg: '#E3E6EA',
 
-
-
   primary: {
     '50': '#EDFAF7',
     '100': '#DFF5F0',

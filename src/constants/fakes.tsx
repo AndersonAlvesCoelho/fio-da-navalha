@@ -1,4 +1,3 @@
-import { IEvent } from '@/@types/events';
 import { IComment, ILike, IPost } from '@/@types/post';
 import { EnumPaymentStatus } from '@/@types/users';
 
@@ -163,15 +162,15 @@ export const FAKE_STUDENTS_PAYMENT = Array.from({ length: 20 }).map((_, i) => {
   };
 });
 
-
-export const FAKES_EVENTS: IEvent[] = [
+export const FAKES_EVENTS = [
   {
     title: '2025-08-06',
     data: [
       {
         id: '1',
         title: 'Aula de Capoeira',
-        description: 'Treino voltado para iniciantes com musicalidade.',
+        thumbnail: 'https://picsum.photos/400/200?random=1',
+        date: '06/08/2025',
         timeStart: '19:00',
         timeEnd: '20:30',
         location: 'Sala 1 - Capoeira',
@@ -180,7 +179,8 @@ export const FAKES_EVENTS: IEvent[] = [
       {
         id: '2',
         title: 'Aniversário da Maria',
-        description: 'Comemoração com roda de amigos e confraternização.',
+        thumbnail: 'https://picsum.photos/400/200?random=2',
+        date: '06/08/2025',
         timeStart: '00:00',
         timeEnd: '02:00',
         location: 'Quadra Central',
@@ -194,7 +194,8 @@ export const FAKES_EVENTS: IEvent[] = [
       {
         id: '3',
         title: 'Aula de Jiu-Jitsu',
-        description: 'Treino avançado focado em raspagens e finalizações.',
+        thumbnail: 'https://picsum.photos/400/200?random=3',
+        date: '08/08/2025',
         timeStart: '20:00',
         timeEnd: '22:00',
         location: 'Tatame Principal',
@@ -208,7 +209,8 @@ export const FAKES_EVENTS: IEvent[] = [
       {
         id: '4',
         title: 'Roda de Capoeira Comemorativa',
-        description: 'Evento mensal aberto para familiares e convidados.',
+        thumbnail: 'https://picsum.photos/400/200?random=4',
+        date: '15/08/2025',
         timeStart: '18:00',
         timeEnd: '20:30',
         location: 'Quadra Central',
@@ -222,7 +224,8 @@ export const FAKES_EVENTS: IEvent[] = [
       {
         id: '5',
         title: 'Treino especial de Jiu-Jitsu',
-        description: 'Workshop de defesa pessoal com faixa preta convidado.',
+        thumbnail: 'https://picsum.photos/400/200?random=5',
+        date: '16/08/2025',
         timeStart: '10:00',
         timeEnd: '13:00',
         location: 'Sala Multiuso',
